@@ -1,5 +1,5 @@
-cucumber:
-	yarn --cwd e2e/ cucumber
+cucumber-dev:
+	yarn --cwd e2e/ cucumber:dev
 
 start:
 	yarn start
