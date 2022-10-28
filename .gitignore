@@ -26,3 +26,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+#E2E
+./e2e/reports/
+./e2e/reports/screenshot/
