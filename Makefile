@@ -1,5 +1,7 @@
-cucumber-dev:
-	yarn --cwd e2e/ cucumber:dev
+UI_AUTOMATION_BROWSER ?= 'chromium'
+
+cucumber:
+	yarn --cwd e2e/ cucumber --profile dev
 
 start:
 	yarn start

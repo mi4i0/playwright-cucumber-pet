@@ -27,4 +27,5 @@ yarn-debug.log*
 yarn-error.log*
 
 #E2E
-./e2e/reports/
+e2e/reports/
+e2e/dist/
