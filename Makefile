@@ -1,7 +1,7 @@
-UI_AUTOMATION_BROWSER ?= 'chromium'
+E2E_PROFILE?=dev
 
 cucumber:
-	yarn --cwd e2e/ cucumber --profile dev
+	yarn --cwd e2e/ cucumber --profile $(E2E_PROFILE) || yarn --cwd e2e/ postcucumber
 
 start:
 	yarn start
