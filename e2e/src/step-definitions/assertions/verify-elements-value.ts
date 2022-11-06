@@ -5,8 +5,8 @@ import { ScenarioWorld } from '../setup/worlds';
 import { waitFor } from '../../support/wait-for-behaviour';
 
 Then(
-  /^the "([^"]*)" should be displayed/,
-  async function (this: ScenarioWorld, elementKey: ElementKey) {
+  /^the "([^"]*)" should contain the text "(.*)"$/,
+  async function (this: ScenarioWorld, elementKey: ElementKey, expectedElementText: string) {
     const {
       screen: {page},
       globalVariables,
@@ -15,8 +15,9 @@ Then(
 
     const elementIdentifier: ElementKey = getElementLocator(page, elementKey, globalVariables, globalConfig);
 
-    await waitFor( async () => {
-      return (await page.$(elementIdentifier)) != null
+    await waitFor(async () => {
+      const elementText = await page.textContent(elementIdentifier)
+      return elementText?.includes((expectedElementText))
     })
   }
 )

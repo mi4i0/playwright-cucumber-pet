@@ -1,11 +1,10 @@
-import { After, Before, ITestCaseHookParameter } from '@cucumber/cucumber';
+import { After, Before, ITestCaseHookParameter, setDefaultTimeout } from '@cucumber/cucumber';
 import { ScenarioWorld } from './worlds';
-import { env } from '../../env/parseEnv';
+import { env, envNumber } from '../../env/parseEnv';
 
-
+setDefaultTimeout(envNumber('SCRIPT_TIMEOUT'))
 
 Before(async function (this: ScenarioWorld, scenario: ITestCaseHookParameter) {
-  console.log(`Running cucumber scenario ${scenario.pickle.name}`)
 
   const contextOptions = {
     recordVideo: {
@@ -17,7 +16,6 @@ Before(async function (this: ScenarioWorld, scenario: ITestCaseHookParameter) {
 })
 
 After(async function (this: ScenarioWorld, scenario: ITestCaseHookParameter) {
-  console.log(`Ending cucumber scenario ${scenario.pickle.name}`)
 
   const {
     screen: {
