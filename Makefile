@@ -1,6 +1,9 @@
 E2E_PROFILE?=dev
 
-cucumber:
+install-e2e-dependencies:
+	yarn install --cwd e2e
+
+run-e2e:
 	yarn --cwd e2e/ cucumber --profile $(E2E_PROFILE) || yarn --cwd e2e/ postcucumber
 
 start:
@@ -9,7 +12,7 @@ start:
 docker-build:
 	docker build -t sample:dev .
 docker-run:
-	docker run \
+	docker run -d \
         -it \
         --rm \
         -v ${PWD}:/app \

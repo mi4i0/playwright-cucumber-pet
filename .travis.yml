@@ -1,0 +1,20 @@
+os: linux
+dist: xenial
+language: node_js
+node_js:
+  - 14
+
+services:
+  - docker
+
+cache: yarn
+
+before_script:
+  - make docker-build
+  - make docker-run
+
+before_install:
+  - make install-e2e-dependencies
+
+script:
+  - make run-e2e
