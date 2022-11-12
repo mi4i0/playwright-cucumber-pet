@@ -1,5 +1,5 @@
 import React from "react";
-import { Helmet } from 'react-helmet'
+import {Helmet} from 'react-helmet';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,49 +12,46 @@ import {BasicAutoComplete} from './components/BasicAutoComplete.react';
 import {BasicCheckBox} from './components/BasicCheckBox.react';
 import {BasicCard} from './components/BasicCard.react';
 import {BasicSwitch} from './components/BasicSwitch.react';
-import {BasicButtons} from './components/BasicButtons.react'
-import {BasicAvatars} from './components/BasicAvatars.react'
-import {BasicTab} from './components/BasicTab.react'
-import {BasicMenu} from './components/BasicMenu.react'
-import {BasicTextArea} from './components/BasicTextArea.react'
-import {BasicTable} from './components/BasicTable.react'
-import {BasicTooltip} from './components/BasicTooltip.react'
+import {BasicButtons} from './components/BasicButtons.react';
+import {BasicAvatars} from './components/BasicAvatars.react';
+import {BasicTab} from './components/BasicTab.react';
+import {BasicMenu} from './components/BasicMenu.react';
+import {BasicTextArea} from './components/BasicTextArea.react';
+import {BasicTable} from './components/BasicTable.react';
+import {BasicTooltip} from './components/BasicTooltip.react';
 import {BasicAlert} from "./components/BasicAlert.react";
-import {BasicOpenWindow} from './components/BasicOpenWindow.react'
-import {BasicBrowserAlert} from './components/BasicBrowserAlert.react'
+import {BasicOpenWindow} from './components/BasicOpenWindow.react';
+import {BasicBrowserAlert} from './components/BasicBrowserAlert.react';
 import {BasicShowHide} from "./components/BasicShowHide.react";
-import {BasicSelect} from "./components/BasicSelect.react"
-import {BasicIframe} from "./components/BasicIframe.react"
-import {BasicValidation} from "./components/BasicValidation.react"
-import {BasicStoredValues} from './components/BasicStoredValues.react'
-import {BasicIndex} from './components/BasicIndex.react'
-import {BasicValues} from './components/BasicValues.react'
-import {BasicInputValues} from './components/BasicInputValues.react'
-import {BasicLogin} from './components/BasicLogin.react'
-import {BasicREST} from './components/BasicREST.react'
+import {BasicSelect} from "./components/BasicSelect.react";
+import {BasicIframe} from "./components/BasicIframe.react";
+import {BasicValidation} from "./components/BasicValidation.react";
+import {BasicStoredValues} from './components/BasicStoredValues.react';
+import {BasicIndex} from './components/BasicIndex.react';
+import {BasicValues} from './components/BasicValues.react';
+import {BasicInputValues} from './components/BasicInputValues.react';
+import {BasicLogin} from './components/BasicLogin.react';
+import {BasicREST} from './components/BasicREST.react';
 
-import {
- Navbar,
- Container
-} from "react-bootstrap";
+import {Container, Navbar} from "react-bootstrap";
 
 const contacts = require('./contacts.json');
 
 class App extends React.Component {
-  state = {
-    formContact: {},
-    contacts: JSON.parse(JSON.stringify(contacts)).map(contact => {
-      contact.id = getNextId();
-      return contact;
-    }),
-    error: null,
-  };
+    state = {
+        formContact: {},
+        contacts: JSON.parse(JSON.stringify(contacts)).map(contact => {
+            contact.id = getNextId();
+            return contact;
+        }),
+        error: null,
+    };
 
-  componentDidUpdate(prevProps, prevState) {
-    const {error} = this.state;
-    if (prevState.error !== error && error) {
-      setTimeout(() => {
-        this.setState({error: null});
+    componentDidUpdate(prevProps, prevState) {
+        const {error} = this.state;
+        if (prevState.error !== error && error) {
+            setTimeout(() => {
+                this.setState({error: null});
       }, 5000);
     }
   }
@@ -132,19 +129,22 @@ class App extends React.Component {
   renderCreateForm = ({history}) => {
 
     return (
-      <>
-        <Helmet>
-            <title>Create Contact</title>
-        </Helmet>
-        <div className="App">
-        <h1 className="create-contact">Create Contact</h1>
-        <ContactForm
-          contact={null}
-          onSave={contact => this.onCreate(contact, history)}
-          onCancel={() => this.routeHome(history)}
-        />
-        </div>
-      </>
+        <>
+            <Helmet>
+                <title>Create Contact</title>
+            </Helmet>
+            <div className="App">
+                <h1
+                    className="create-contact"
+                    data-id="create-contact-header"
+                >Create Contact</h1>
+                <ContactForm
+                    contact={null}
+                    onSave={contact => this.onCreate(contact, history)}
+                    onCancel={() => this.routeHome(history)}
+                />
+            </div>
+        </>
     );
   };
 
