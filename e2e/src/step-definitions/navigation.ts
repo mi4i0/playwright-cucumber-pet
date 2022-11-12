@@ -1,7 +1,8 @@
 import { Given } from '@cucumber/cucumber'
 import { PageId } from '../env/global';
-import {navigateToPage } from '../support/navigation-behavior';
-import { ScenarioWorld } from './setup/worlds';
+import { currentPathMatchesPageId, navigateToPage } from '../support/navigation-behavior';
+import { ScenarioWorld } from './setup/world';
+import { waitFor } from '../support/wait-for-behaviour';
 
 Given(
   /^I am on the "([^"]*)" page$/,
@@ -9,13 +10,12 @@ Given(
     const {
       screen: {page},
       globalConfig,
-      globalVariables,
     } = this;
 
     console.log(`'I\'m on the ${pageId} page'`);
 
-    globalVariables.currentScreen = pageId
+    await navigateToPage(page, pageId, globalConfig);
 
-    await navigateToPage(page, pageId, globalConfig)
+    await waitFor(() => currentPathMatchesPageId(page, pageId, globalConfig));
   }
 )

@@ -1,5 +1,5 @@
 import { After, Before, ITestCaseHookParameter, setDefaultTimeout } from '@cucumber/cucumber';
-import { ScenarioWorld } from './worlds';
+import { ScenarioWorld } from './world';
 import { env, envNumber } from '../../env/parseEnv';
 
 setDefaultTimeout(envNumber('SCRIPT_TIMEOUT'))

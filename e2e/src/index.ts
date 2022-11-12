@@ -24,8 +24,6 @@ const worldParameters: GlobalConfig = {
   pageElementMappings,
 };
 
-
-
 const common = `./src/features/**/*.feature \
 --require-module ts-node/register \
 --require ./src/step-definitions/**/**/*.ts \
