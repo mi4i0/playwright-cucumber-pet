@@ -12,7 +12,7 @@ When(/^I click the "([^"]*)" (?:link|button|icon|element)$/,
       globalConfig,
     } = this;
 
-    console.log(`I click the ${elementKey} (?: button|link|icon|element)`);
+    console.log(`I click the ${elementKey}`);
 
     const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 

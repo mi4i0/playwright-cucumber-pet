@@ -20,14 +20,14 @@ Given(
   }
 );
 
-Given(/^I am directed to the "([^"]*)" page$/,
+Given( /^I am directed to the "([^"]*)" page$/,
   async function (this: ScenarioWorld, pageId: PageId) {
     const {
       screen: {page},
       globalConfig,
     } = this;
 
-    console.log(`I am directed to he ${pageId}`);
+    console.log(`I am directed to the ${pageId}`);
 
     await waitFor(() => currentPathMatchesPageId(page, pageId, globalConfig));
   });
