@@ -20,3 +20,21 @@ Then(
     });
   }
 );
+Then(
+  /^the "([^"]*)" should be equal the text "(.*)"$/,
+  async function (this: ScenarioWorld, elementKey: ElementKey, expectedElementText: string) {
+    const {
+      screen: {page},
+      globalConfig,
+    } = this;
+
+    console.log(`the ${elementKey} should be equal ${expectedElementText}`);
+
+    const elementIdentifier: ElementKey = getElementLocator(page, elementKey, globalConfig);
+
+    await waitFor(async () => {
+      const elementText = await page.textContent(elementIdentifier);
+      return elementText=== expectedElementText;
+    });
+  }
+);

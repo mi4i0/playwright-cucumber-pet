@@ -1,4 +1,4 @@
-import { Then } from '@cucumber/cucumber'
+import { Then } from '@cucumber/cucumber';
 import { ElementKey } from '../../env/global';
 import { getElementLocator } from '../../support/web-element-helper';
 import { ScenarioWorld } from '../setup/world';
@@ -15,7 +15,7 @@ Then(
     const elementIdentifier: ElementKey = getElementLocator(page, elementKey, globalConfig);
 
     await waitFor( async () => {
-      return (await page.$(elementIdentifier)) != null
-    })
+      return (await page.$(elementIdentifier)) != null;
+    });
   }
-)
+);
