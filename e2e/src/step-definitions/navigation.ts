@@ -16,11 +16,11 @@ Given(
 
     await navigateToPage(page, pageId, globalConfig);
 
-    await waitFor(() => currentPathMatchesPageId(page, pageId, globalConfig));
+    await waitFor(async () => currentPathMatchesPageId(page, pageId, globalConfig));
   }
 );
 
-Given( /^I am directed to the "([^"]*)" page$/,
+Given(/^I am directed to the "([^"]*)" page$/,
   async function (this: ScenarioWorld, pageId: PageId) {
     const {
       screen: {page},
@@ -29,5 +29,5 @@ Given( /^I am directed to the "([^"]*)" page$/,
 
     console.log(`I am directed to the ${pageId}`);
 
-    await waitFor(() => currentPathMatchesPageId(page, pageId, globalConfig));
+    await waitFor(async () => currentPathMatchesPageId(page, pageId, globalConfig));
   });
