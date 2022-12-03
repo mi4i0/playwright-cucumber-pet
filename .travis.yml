@@ -17,4 +17,4 @@ before_install:
   - make install-e2e-dependencies
 
 script:
-  - make run-e2e
+  - make run-e2e E2E_PROFILE=regression
