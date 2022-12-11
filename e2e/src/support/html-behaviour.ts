@@ -8,6 +8,15 @@ export const clickElement = async (
   await page.click(elementIdentifier);
 };
 
+export const clickElementAtIndex = async (
+  page: Page,
+  elementIdentifier: ElementLocator,
+  elementPosition: number
+): Promise<void> => {
+  const element = await page.$(`${elementIdentifier}>>nth=${elementPosition}`);
+  await element?.click();
+};
+
 export const inputValue = async (
   page: Page,
   elementIdentifier: ElementLocator,
@@ -67,4 +76,14 @@ export const inputValueOnIframe = async (
   inputValue: string
 ): Promise<void> => {
   await elementIframe.fill(elementIdentifier, inputValue);
+};
+
+export const inputValueOnPage = async (
+  pages: Page[],
+  pageIndex: number,
+  elementIdentifier: ElementLocator,
+  inputValue: string
+): Promise<void> => {
+  await pages[pageIndex].focus(elementIdentifier);
+  await pages[pageIndex].fill(elementIdentifier, inputValue);
 };

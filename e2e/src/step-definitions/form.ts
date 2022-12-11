@@ -3,7 +3,7 @@ import { ScenarioWorld } from './setup/world';
 import { ElementKey } from '../env/global';
 import { getElementLocator } from '../support/web-element-helper';
 import { inputValue, selectValue } from '../support/html-behaviour';
-import { waitFor } from '../support/wait-for-behaviour';
+import { waitFor } from '../support/wait-for-behavior';
 
 Then(/^I fill in the "([^"]*)" input with "([^"]*)"$/,
   async function (this: ScenarioWorld, elementKey: ElementKey, input: string) {

@@ -1,10 +1,10 @@
 import { ScenarioWorld } from '../setup/world';
 import { ElementKey } from '../../env/global';
-import { waitFor } from '../../support/wait-for-behaviour';
+import { waitFor } from '../../support/wait-for-behavior';
 import { Then } from '@cucumber/cucumber';
 import { getElementLocator } from '../../support/web-element-helper';
 
-Then(/^the "([^"]*)" (?:check box|radio button) should( not)? be checked$/,
+Then(/^the "([^"]*)" (?:check box|radio button|switch) should( not)? be checked$/,
   async function (this: ScenarioWorld, elementKey: ElementKey, negate: boolean) {
     const {
       screen: {page},

@@ -3,7 +3,7 @@ import { ScenarioWorld } from '../setup/world';
 import { ElementKey } from '../../env/global';
 import { getElementLocator } from '../../support/web-element-helper';
 import { getIframeElement } from '../../support/html-behaviour';
-import { waitFor } from '../../support/wait-for-behaviour';
+import { waitFor } from '../../support/wait-for-behavior';
 
 Then(/^the "([^"]*)" on the "([^"]*)" iframe should( not)? be displayed$/,
   async function (this: ScenarioWorld, elementKey: ElementKey, iframeName: string, negate: boolean) {
