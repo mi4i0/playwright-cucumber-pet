@@ -4,14 +4,14 @@ import { waitFor } from '../../support/wait-for-behaviour';
 import { Then } from '@cucumber/cucumber';
 import { getElementLocator } from '../../support/web-element-helper';
 
-Then(/^the "([^"]*)" radio button should( not)? be checked$/,
+Then(/^the "([^"]*)" (?:check box|radio button) should( not)? be checked$/,
   async function (this: ScenarioWorld, elementKey: ElementKey, negate: boolean) {
     const {
       screen: {page},
       globalConfig,
     } = this;
 
-    console.log(`the ${elementKey} radio button should ${negate ? 'not' : ''} be checked`);
+    console.log(`the ${elementKey} check box|radio button should ${negate ? 'not ' : ''}be checked`);
 
     const elementIdentifier: string = getElementLocator(page, elementKey, globalConfig);
 
