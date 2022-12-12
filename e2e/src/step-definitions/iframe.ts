@@ -2,7 +2,7 @@ import { Then } from '@cucumber/cucumber';
 import { ScenarioWorld } from './setup/world';
 import { ElementKey } from '../env/global';
 import { getElementLocator } from '../support/web-element-helper';
-import { waitFor } from '../support/wait-for-behaviour';
+import { waitFor } from '../support/wait-for-behavior';
 import { getIframeElement, inputValueOnIframe } from '../support/html-behaviour';
 
 Then(/^I fill in the "([^"]*)" input on the "([^"]*)" iframe with "([^"]*)"$/,

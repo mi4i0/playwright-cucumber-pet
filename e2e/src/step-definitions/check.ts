@@ -2,10 +2,10 @@ import { Then } from '@cucumber/cucumber';
 import { ScenarioWorld } from './setup/world';
 import { ElementKey } from '../env/global';
 import { getElementLocator } from '../support/web-element-helper';
-import { waitFor } from '../support/wait-for-behaviour';
+import { waitFor } from '../support/wait-for-behavior';
 import { checkElement, uncheckElement } from '../support/html-behaviour';
 
-Then(/^I (check)?(uncheck)? the "([^"]*)" (?:radio button|check box)$/,
+Then(/^I (check)?(uncheck)? the "([^"]*)" (?:radio button|check box|switch)$/,
   async function (this: ScenarioWorld, isChecked: boolean, isUnchecked: boolean, elementKey: ElementKey) {
     const {
       screen: {page},
