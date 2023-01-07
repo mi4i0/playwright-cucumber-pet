@@ -1,10 +1,11 @@
 E2E_PROFILE?=dev
+NODE_ENV?=localhost
 
 install-e2e-dependencies:
 	yarn install --cwd e2e
 
 run-e2e:
-	yarn --cwd e2e/ cucumber --profile $(E2E_PROFILE) || yarn --cwd e2e/ postcucumber
+	yarn --cwd e2e/ cucumber:$(NODE_ENV) --profile $(E2E_PROFILE) || yarn --cwd e2e/ postcucumber
 
 start:
 	yarn start

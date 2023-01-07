@@ -6,8 +6,8 @@ import { styled } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
 import Badge from '@mui/material/Badge';
 import Stack from '@mui/material/Stack';
-import profilePhoto from "../assets/css/images/profile.jpeg"
-import gitLogo from "../assets/css/images/git-logo.png"
+import cameron from "../assets/css/images/cam.jpeg"
+import testingtalks from "../assets/css/images/testing-talks.png"
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -73,16 +73,16 @@ export class BasicAvatars extends React.Component {
                             anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                             variant="dot"
                         >
-                            <a data-id="avatar" rel="noopener noreferrer" target="_blank" href="https://www.linkedin.com/in/mykytenko/"><Avatar alt="Vladyslav Mykytenko" src={profilePhoto} /></a>
+                            <a data-id="avatar" rel="noopener noreferrer" target="_blank" href="https://www.linkedin.com/in/cambradley/"><Avatar alt="Cameron Bradley" src={cameron} /></a>
                         </StyledBadge>
                         <Badge
                             overlap="circular"
                             anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                             badgeContent={
-                                <SmallAvatar data-id="small-avatar" alt="Git Profile" src={gitLogo} />
+                                <SmallAvatar data-id="small-avatar" alt="Remy Sharp" src={testingtalks} />
                             }
                         >
-                            <a data-id="avatar" rel="noopener noreferrer" target="_blank" href="https://github.com/mi4i0"><Avatar alt="Git Profile" src={gitLogo} /></a>
+                            <a data-id="avatar" rel="noopener noreferrer" target="_blank" href="https://www.testingtalks.com.au/"><Avatar alt="Testing Talks" src={testingtalks} /></a>
                         </Badge>
                     </Stack>
                 </ThemeProvider>

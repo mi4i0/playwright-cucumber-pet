@@ -3,7 +3,10 @@ import { env, getJsonFromFile } from './env/parseEnv';
 import { GlobalConfig, HostConfig, PageElementMapping, PagesConfig } from './env/global';
 import * as fs from 'fs';
 
+const environment = env('NODE_ENV');
+
 dotenv.config({path: env('COMMON_CONFIG_FILE')});
+dotenv.config({path: `${env('ENV_PATH')}${environment}.env`});
 
 const hostsConfig: HostConfig = getJsonFromFile(env('HOST_URLS_PATH'));
 const pagesConfig: PagesConfig = getJsonFromFile(env('PAGES_URLS_PATH'));
