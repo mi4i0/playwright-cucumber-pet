@@ -17,17 +17,14 @@ When(
 
     const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
-    const dataBefore = await page.$$eval(elementIdentifier + " tbody tr", (rows) => {
-      return rows.map(row => {
-        const cells = row.querySelectorAll('td');
-        return Array.from(cells).map(cell => cell.textContent);
-      });
-    });
-
-    console.log("html table ", JSON.stringify(dataBefore));
-    console.log("cucumber table ", JSON.stringify(dataTable.raw()));
-
     await waitFor(async () => {
+      const dataBefore = await page.$$eval(elementIdentifier + " tbody tr", (rows) => {
+        return rows.map(row => {
+          const cells = row.querySelectorAll('td');
+          return Array.from(cells).map(cell => cell.textContent);
+        });
+      });
+
       return JSON.stringify(dataBefore) === JSON.stringify(dataTable.raw()) === !negate;
     });
 

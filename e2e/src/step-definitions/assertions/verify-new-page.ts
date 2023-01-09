@@ -15,7 +15,7 @@ Then(/^the "([0-9]+th|[0-9]+st|[0-9]+nd|[0-9]+rd)" (?:tab|window) should( not)? 
 
     const pageIndex = Number(elementPosition.match(/\d/g)?.join('')) - 1;
 
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(2000);
 
     await waitFor(async () => {
       const pages = context.pages();

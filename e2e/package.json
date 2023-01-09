@@ -6,8 +6,9 @@
   "scripts": {
     "precucumber": "rimraf reports && mkdir reports && echo {}>./reports/report.json",
     "transpile": "rimraf dist && babel --extensions .ts --out-dir dist src",
-    "cucumber-compile": "yarn transpile && cucumber-js",
-    "cucumber": "COMMON_CONFIG_FILE=./env/common.env yarn cucumber-compile",
+    "cucumber": "yarn transpile && cucumber-js",
+    "cucumber:localhost": "NODE_ENV=localhost COMMON_CONFIG_FILE=env/common.env yarn cucumber",
+    "cucumber:production": "NODE_ENV=production COMMON_CONFIG_FILE=env/common.env yarn cucumber",
     "postcucumber": "COMMON_CONFIG_FILE=./env/common.env ts-node ./src/reporter/cucumber-report.ts"
   },
   "author": "",

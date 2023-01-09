@@ -14,9 +14,9 @@ Then(/^the "([^"]*)" on the "([^"]*)" iframe should( not)? be displayed$/,
 
     const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
     const iframeIdentifier = getElementLocator(page, iframeName, globalConfig);
-    const elementIframe = await getIframeElement(page, iframeIdentifier);
 
     await waitFor(async () => {
+      const elementIframe = await getIframeElement(page, iframeIdentifier);
       const isElementVisible = (await elementIframe?.$(elementIdentifier)) != null;
       return isElementVisible === !negate;
     });
@@ -31,9 +31,9 @@ Then(/^the "([^"]*)" on the "([^"]*)" iframe should( not)? contain the text "(.*
 
     const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
     const iframeIdentifier = getElementLocator(page, iframeName, globalConfig);
-    const elementIframe = await getIframeElement(page, iframeIdentifier);
 
     await waitFor(async () => {
+      const elementIframe = await getIframeElement(page, iframeIdentifier);
       const elementText = await elementIframe?.textContent(elementIdentifier);
       return elementText?.includes(expectedElementText) === !negate;
     });
@@ -48,9 +48,9 @@ Then(/^the "([^"]*)" on the "([^"]*)" iframe should( not)? equal the text "(.*)"
 
     const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
     const iframeIdentifier = getElementLocator(page, iframeName, globalConfig);
-    const elementIframe = await getIframeElement(page, iframeIdentifier);
 
     await waitFor(async () => {
+      const elementIframe = await getIframeElement(page, iframeIdentifier);
       const elementText = await elementIframe?.textContent(elementIdentifier);
       return (elementText === expectedElementText) === !negate;
     });
