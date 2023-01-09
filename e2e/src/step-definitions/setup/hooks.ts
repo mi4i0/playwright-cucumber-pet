@@ -7,6 +7,7 @@ setDefaultTimeout(envNumber('SCRIPT_TIMEOUT'));
 Before(async function (this: ScenarioWorld, scenario: ITestCaseHookParameter) {
 
   const contextOptions = {
+    ignoreHTTPSErrors: true,
     recordVideo: {
       dir: `${env('VIDEO_PATH')}${scenario.pickle.name}`,
     }

@@ -5,6 +5,7 @@ Feature: As user I can interact with IFrames
     Given I am on the "home" page
     And I click the "playground" button
     Then I am directed to the "playground" page
+    And I scroll to the "basic iframe"
     And I fill in the "search" input on the "basic iframe" iframe with "Abraham Perry"
     And the "contact" on the "basic iframe" iframe should be displayed
     And the "full name label" on the "basic iframe" iframe should contain the text "Name:"

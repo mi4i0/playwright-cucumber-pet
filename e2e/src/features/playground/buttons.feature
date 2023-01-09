@@ -1,6 +1,5 @@
 Feature: As a user I can interact with buttons at index
 
-  @dev
   @smoke @regression
   Scenario: As a user I can interact and assert on buttons at index
     Given I am on the "home" page
