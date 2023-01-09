@@ -4,6 +4,7 @@ import { ElementKey } from '../env/global';
 import { getElementLocator } from '../support/web-element-helper';
 import { inputValue, selectValue } from '../support/html-behaviour';
 import { waitFor } from '../support/wait-for-behavior';
+import { parseInput } from '../support/input-helper';
 
 Then(/^I fill in the "([^"]*)" input with "([^"]*)"$/,
   async function (this: ScenarioWorld, elementKey: ElementKey, input: string) {
@@ -22,7 +23,8 @@ Then(/^I fill in the "([^"]*)" input with "([^"]*)"$/,
       });
 
       if (result){
-        await inputValue(page,elementIdentifier, input);
+        const parsedInput = parseInput(input, globalConfig);
+        await inputValue(page,elementIdentifier, parsedInput);
       }
 
       return result;
