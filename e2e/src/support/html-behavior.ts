@@ -11,7 +11,7 @@ export const clickElement = async (
 export const clickElementAtIndex = async (
   page: Page,
   elementIdentifier: ElementLocator,
-  elementPosition: number
+  elementPosition: number,
 ): Promise<void> => {
   const element = await page.$(`${elementIdentifier}>>nth=${elementPosition}`);
   await element?.click();
@@ -20,7 +20,7 @@ export const clickElementAtIndex = async (
 export const inputValue = async (
   page: Page,
   elementIdentifier: ElementLocator,
-  input: string,
+  input: string
 ): Promise<void> => {
   await page.focus(elementIdentifier);
   await page.fill(elementIdentifier, input);
@@ -29,7 +29,7 @@ export const inputValue = async (
 export const selectValue = async (
   page: Page,
   elementIdentifier: ElementLocator,
-  option: string,
+  option: string
 ): Promise<void> => {
   await page.focus(elementIdentifier);
   await page.selectOption(elementIdentifier, option);
@@ -37,14 +37,14 @@ export const selectValue = async (
 
 export const checkElement = async (
   page: Page,
-  elementIdentifier: ElementLocator,
+  elementIdentifier: ElementLocator
 ): Promise<void> => {
   await page.check(elementIdentifier);
 };
 
 export const uncheckElement = async (
   page: Page,
-  elementIdentifier: ElementLocator,
+  elementIdentifier: ElementLocator
 ): Promise<void> => {
   await page.uncheck(elementIdentifier);
 };
@@ -57,7 +57,6 @@ export const getValue = async (
   const value = await page.$eval<string, HTMLSelectElement>(elementIdentifier, el => {
     return el.value;
   });
-
   return value;
 };
 
@@ -80,10 +79,10 @@ export const inputValueOnIframe = async (
 };
 
 export const inputValueOnPage = async (
-  pages: Page[],
+  pages: Array<Page>,
   pageIndex: number,
   elementIdentifier: ElementLocator,
-  inputValue: string
+  inputValue: string,
 ): Promise<void> => {
   await pages[pageIndex].focus(elementIdentifier);
   await pages[pageIndex].fill(elementIdentifier, inputValue);
@@ -92,12 +91,13 @@ export const inputValueOnPage = async (
 export const getAttributeText = async (
   page: Page,
   elementIdentifier: ElementLocator,
-  attribute: string
+  attribute: string,
 ): Promise<string | null> => {
-  return page.locator(elementIdentifier).getAttribute(attribute);
+  const attributeText = page.locator(elementIdentifier).getAttribute(attribute);
+  return attributeText;
 };
 
-export const scrollElementIntoView = async (
+export const scrollIntoView = async (
   page: Page,
   elementIdentifier: ElementLocator,
 ): Promise<void> => {

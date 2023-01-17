@@ -5,7 +5,8 @@ install-e2e-dependencies:
 	yarn install --cwd e2e
 
 run-e2e:
-	yarn --cwd e2e/ cucumber:$(NODE_ENV) --profile $(E2E_PROFILE) || yarn --cwd e2e/ postcucumber
+	chmod +x ./e2e/run_tests.sh
+	./e2e/run_tests.sh $(NODE_ENV) $(E2E_PROFILE)
 
 start:
 	yarn start

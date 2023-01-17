@@ -1,11 +1,11 @@
-import { DataTable, When } from '@cucumber/cucumber';
+import { DataTable, Then } from '@cucumber/cucumber';
+import { ElementKey } from '../../env/global';
 import { ScenarioWorld } from '../setup/world';
 import { getElementLocator } from '../../support/web-element-helper';
-import { ElementKey } from '../../env/global';
-import { waitFor } from "../../support/wait-for-behavior";
+import { waitFor } from '../../support/wait-for-behavior';
+import { logger } from '../../logger';
 
-
-When(
+Then(
   /^the "([^"]*)" table should( not)? equal the following:$/,
   async function (this: ScenarioWorld, elementKey: ElementKey, negate: boolean, dataTable: DataTable) {
     const {
@@ -13,7 +13,7 @@ When(
       globalConfig,
     } = this;
 
-    console.log(`the ${elementKey} table should ${negate ? 'not ' : ''}equal the following:`);
+    logger.log(`the ${elementKey} table should ${negate ? ' not' : ''}equal the following:`);
 
     const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
@@ -27,6 +27,5 @@ When(
 
       return JSON.stringify(dataBefore) === JSON.stringify(dataTable.raw()) === !negate;
     });
-
   }
 );
