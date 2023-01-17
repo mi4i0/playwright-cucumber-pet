@@ -7,15 +7,9 @@ export const getElementLocator = (
   elementKey: ElementKey,
   globalConfig: GlobalConfig,
 ): ElementLocator => {
+    const {pageElementMappings} = globalConfig;
 
-  const currentPage = getCurrentPageId(page, globalConfig);
+    const currentPage = getCurrentPageId(page, globalConfig);
 
-  const {pageElementMappings} = globalConfig;
-
-  const elementIdentifier = pageElementMappings[currentPage]?.[elementKey] || pageElementMappings.common?.[elementKey];
-  if (!elementIdentifier) {
-    throw Error(`Identifier "${elementKey}" doesn't exist in "${currentPage}" or "Common" mappings`);
-  }
-
-  return elementIdentifier;
+    return pageElementMappings[currentPage]?.[elementKey] || pageElementMappings.common?.[elementKey];
 };

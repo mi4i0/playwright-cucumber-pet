@@ -11,4 +11,3 @@ Feature: As a user I can interact with select boxes
     And the "age" should contain the value "20"
     And I select the "30" option from the "age"
     And the "age" should contain the value "30"
-

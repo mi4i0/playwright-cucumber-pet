@@ -1,10 +1,10 @@
-Feature: As user I can interact with IFrames
+Feature: As a user I can interact with IFrames
 
   @smoke @regression
-  Scenario: As a user I can interact and assert IFrames
+  Scenario: As a user I can interact and assert on IFrames
     Given I am on the "home" page
     And I click the "playground" button
-    Then I am directed to the "playground" page
+    When I am directed to the "playground" page
     And I scroll to the "basic iframe"
     And I fill in the "search" input on the "basic iframe" iframe with "Abraham Perry"
     And the "contact" on the "basic iframe" iframe should be displayed

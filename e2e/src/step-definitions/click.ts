@@ -1,18 +1,20 @@
 import { When } from '@cucumber/cucumber';
+import { clickElement, clickElementAtIndex, } from '../support/html-behavior';
 import { ScenarioWorld } from './setup/world';
-import { ElementKey } from '../env/global';
-import { getElementLocator } from '../support/web-element-helper';
 import { waitFor } from '../support/wait-for-behavior';
-import { clickElement, clickElementAtIndex } from '../support/html-behaviour';
+import { getElementLocator } from '../support/web-element-helper';
+import { ElementKey } from '../env/global';
+import { logger } from "../logger";
 
-When(/^I click the "([^"]*)" (?:link|button|icon|element)$/,
+When(
+  /^I click the "([^"]*)" (?:button|link)$/,
   async function (this: ScenarioWorld, elementKey: ElementKey) {
     const {
       screen: {page},
       globalConfig,
     } = this;
 
-    console.log(`I click the ${elementKey}`);
+    logger.log(`I click the ${elementKey} (?:button|link|icon|element|radio button)`);
 
     const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
@@ -20,26 +22,27 @@ When(/^I click the "([^"]*)" (?:link|button|icon|element)$/,
       const result = await page.waitForSelector(elementIdentifier, {
         state: 'visible',
       });
-
       if (result) {
         await clickElement(page, elementIdentifier);
       }
-
       return result;
     });
+  }
+);
 
-  });When(/^I click the "([0-9]+th|[0-9]+st|[0-9]+nd|[0-9]+rd)" "([^"]*)" (?:link|button|icon|element)$/,
+When(
+  /^I click the "([0-9]+th|[0-9]+st|[0-9]+nd|[0-9]+rd)" "([^"]*)" (?:button|link)$/,
   async function (this: ScenarioWorld, elementPosition: string, elementKey: ElementKey) {
     const {
       screen: {page},
       globalConfig,
     } = this;
 
-    console.log(`I click ${elementPosition} ${elementKey} button|link`);
+    logger.log(`I click ${elementPosition} ${elementKey} button|link`);
 
     const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
-    const elementIndex = Number(elementPosition.match(/\d/g)?.join('')) - 1;
 
+    const pageIndex = Number(elementPosition.match(/\d/g)?.join('')) - 1;
 
     await waitFor(async () => {
       const result = await page.waitForSelector(elementIdentifier, {
@@ -47,9 +50,9 @@ When(/^I click the "([^"]*)" (?:link|button|icon|element)$/,
       });
 
       if (result) {
-        await clickElementAtIndex(page, elementIdentifier, elementIndex);
+        await clickElementAtIndex(page, elementIdentifier, pageIndex);
       }
-
       return result;
     });
-  });
+  }
+);

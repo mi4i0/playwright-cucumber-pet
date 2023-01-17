@@ -1,3 +1,5 @@
+import { logger } from '../logger';
+
 export const waitFor = async <T>(
   predicate: () => T | Promise<T>,
   options?: { timeout?: number; wait?: number }
@@ -5,7 +7,6 @@ export const waitFor = async <T>(
   const {timeout = 20000, wait = 2000} = options || {};
 
   const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-
   const startDate = new Date();
 
   while (new Date().getTime() - startDate.getTime() < timeout) {
@@ -13,8 +14,8 @@ export const waitFor = async <T>(
     if (result) return result;
 
     await sleep(wait);
-    console.log(`Waiting ${wait} ms`);
+    logger.log(`Waiting ${wait}ms`);
   }
 
-  throw new Error(`Waiting time of ${timeout}ms exceeded`);
+  throw new Error(`Wait time of ${timeout}ms exceeded`);
 };
