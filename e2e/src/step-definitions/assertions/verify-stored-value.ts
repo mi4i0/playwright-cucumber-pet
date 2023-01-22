@@ -2,8 +2,9 @@ import { Then } from '@cucumber/cucumber';
 import { ElementKey } from '../../env/global';
 import { ScenarioWorld } from '../setup/world';
 import { getElementLocator } from '../../support/web-element-helper';
-import { waitFor } from '../../support/wait-for-behavior';
-import { logger } from '../../logger';
+import { waitFor, waitForSelector } from '../../support/wait-for-behavior';
+import { logger } from "../../logger";
+import { getElementText } from "../../support/html-behavior";
 
 Then(
   /^the "([^"]*)" should( not)? equal the "([^"]*)" stored in global variables$/,
@@ -19,10 +20,17 @@ Then(
     const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
     await waitFor(async () => {
-      const elementText = await page.textContent(elementIdentifier);
+      const elementStable = await waitForSelector(page, elementIdentifier);
+
       const variableValue = globalVariables[variableKey];
 
-      return (elementText === variableValue) === !negate;
+      if (elementStable) {
+        const elementText = await getElementText(page, elementIdentifier);
+        return (elementText === variableValue) === !negate;
+      } else {
+        return elementStable;
+      }
+
     });
   }
 );
@@ -41,10 +49,17 @@ Then(
     const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
     await waitFor(async () => {
-      const elementText = await page.textContent(elementIdentifier);
+      const elementStable = await waitForSelector(page, elementIdentifier);
+
       const variableValue = globalVariables[variableKey];
 
-      return elementText?.includes(variableValue) === !negate;
+      if (elementStable) {
+        const elementText = await getElementText(page, elementIdentifier);
+        return elementText?.includes(variableValue) === !negate;
+      } else {
+        return elementStable;
+      }
+
     });
   }
 );
