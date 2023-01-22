@@ -1,6 +1,7 @@
 import { Then } from '@cucumber/cucumber';
 import { ElementKey } from '../../env/global';
 import { ScenarioWorld } from '../setup/world';
+import { getElement, getElementAtIndex, getElements } from "../../support/html-behavior";
 import { getElementLocator } from '../../support/web-element-helper';
 import { waitFor } from '../../support/wait-for-behavior';
 import { logger } from "../../logger";
@@ -18,7 +19,7 @@ Then(
     const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
     await waitFor(async () => {
-      const isElementVisible = (await page.$(elementIdentifier)) != null;
+      const isElementVisible = await getElement(page, elementIdentifier) != null;
       return isElementVisible === !negate;
     });
   }
@@ -38,7 +39,7 @@ Then(
     const index = Number(elementPosition.match(/\d/g)?.join('')) - 1;
 
     await waitFor(async () => {
-      const isElementVisible = (await page.$(`${elementIdentifier}>>nth=${index}`)) != null;
+      const isElementVisible = await getElementAtIndex(page, elementIdentifier, index) != null;
       return isElementVisible === !negate;
     });
   }
@@ -57,7 +58,7 @@ Then(
     const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
     await waitFor(async () => {
-      const element = await page.$$(elementIdentifier);
+      const element = await getElements(page, elementIdentifier);
       return (Number(count) === element.length) === !negate;
     });
   }
