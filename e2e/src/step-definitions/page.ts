@@ -21,13 +21,15 @@ Then(
     const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
     await waitFor(async () => {
-      const pages = context.pages();
-      const elementStable = await waitForSelectorOnPage(page, elementIdentifier, pages, pageIndex);
-      if (elementStable) {
-        await inputValueOnPage(pages, pageIndex, elementIdentifier, inputValue);
-      }
+        const pages = context.pages();
+        const elementStable = await waitForSelectorOnPage(page, elementIdentifier, pages, pageIndex);
+        if (elementStable) {
+          await inputValueOnPage(pages, pageIndex, elementIdentifier, inputValue);
+        }
 
-      return elementStable;
-    });
+        return elementStable;
+      },
+      globalConfig,
+      {target: elementKey});
   }
 );

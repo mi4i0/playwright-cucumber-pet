@@ -1,27 +1,31 @@
 import { Frame, Page } from "playwright";
-import { ElementLocator } from "../env/global";
+import { ElementLocator, GlobalConfig, WaitForTarget, WaitForTargetType } from "../env/global";
 import { envNumber } from "../env/parseEnv";
-
+import { handleError } from './error-helper';
 import { logger } from "../logger";
 
 export const waitFor = async <T>(
   predicate: () => T | Promise<T>,
-  options?: { timeout?: number; wait?: number }
-): Promise<T> => {
-  const {timeout = 20000, wait = 2000} = options || {};
+  globalConfig: GlobalConfig,
+  options?: { timeout?: number; wait?: number, target: WaitForTarget; type?: WaitForTargetType }
+): Promise<void> => {
+  const {timeout = 10000, wait = 2000, target = '', type = 'element'} = options || {};
 
   const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
   const startDate = new Date();
 
-  while (new Date().getTime() - startDate.getTime() < timeout) {
-    const result = await predicate();
-    if (result) return result;
+  try {
+    while (new Date().getTime() - startDate.getTime() < timeout) {
+      const result = await predicate();
+      if (result) return;
 
-    await sleep(wait);
-    logger.log(`Waiting ${wait}ms`);
+      await sleep(wait);
+      logger.log(`Waiting ${wait}ms`);
+    }
+    throw new Error(`Wait time of ${timeout}ms for ${target} exceeded`);
+  } catch (error) {
+    handleError(globalConfig.errorsConfig, error as Error, target, type,);
   }
-
-  throw new Error(`Wait time of ${timeout}ms exceeded`);
 };
 
 export const waitForSelector = async (

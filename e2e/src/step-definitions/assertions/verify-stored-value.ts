@@ -20,18 +20,19 @@ Then(
     const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
     await waitFor(async () => {
-      const elementStable = await waitForSelector(page, elementIdentifier);
+        const elementStable = await waitForSelector(page, elementIdentifier);
 
-      const variableValue = globalVariables[variableKey];
+        const variableValue = globalVariables[variableKey];
 
-      if (elementStable) {
-        const elementText = await getElementText(page, elementIdentifier);
-        return (elementText === variableValue) === !negate;
-      } else {
-        return elementStable;
-      }
-
-    });
+        if (elementStable) {
+          const elementText = await getElementText(page, elementIdentifier);
+          return (elementText === variableValue) === !negate;
+        } else {
+          return elementStable;
+        }
+      },
+      globalConfig,
+      {target: elementKey});
   }
 );
 
@@ -51,15 +52,17 @@ Then(
     await waitFor(async () => {
       const elementStable = await waitForSelector(page, elementIdentifier);
 
-      const variableValue = globalVariables[variableKey];
+        const variableValue = globalVariables[variableKey];
 
-      if (elementStable) {
-        const elementText = await getElementText(page, elementIdentifier);
-        return elementText?.includes(variableValue) === !negate;
-      } else {
-        return elementStable;
-      }
+        if (elementStable) {
+          const elementText = await getElementText(page, elementIdentifier);
+          return elementText?.includes(variableValue) === !negate;
+        } else {
+          return elementStable;
+        }
 
-    });
+      },
+      globalConfig,
+      {target: elementKey});
   }
 );

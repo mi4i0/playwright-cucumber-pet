@@ -19,14 +19,16 @@ Then(
     const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
     await waitFor(async () => {
-      const elementStable = await waitForSelector(page, elementIdentifier);
+        const elementStable = await waitForSelector(page, elementIdentifier);
 
-      if (elementStable) {
-        const tableData = await getTableData(page, elementIdentifier);
-        return tableData === JSON.stringify(dataTable.raw()) === !negate;
-      } else {
-        return elementStable;
-      }
-    });
+        if (elementStable) {
+          const tableData = await getTableData(page, elementIdentifier);
+          return tableData === JSON.stringify(dataTable.raw()) === !negate;
+        } else {
+          return elementStable;
+        }
+      },
+      globalConfig,
+      {target: elementKey});
   }
 );

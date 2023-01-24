@@ -19,13 +19,15 @@ Then(
     const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
     await waitFor(async () => {
-      const elementStable = await waitForSelector(page, elementIdentifier);
+        const elementStable = await waitForSelector(page, elementIdentifier);
 
-      if (elementStable) {
-        await scrollElementIntoView(page, elementIdentifier);
-      }
+        if (elementStable) {
+          await scrollElementIntoView(page, elementIdentifier);
+        }
 
-      return elementStable;
-    });
+        return elementStable;
+      },
+      globalConfig,
+      {target: elementKey});
   }
 );

@@ -21,15 +21,17 @@ Then(
     await waitFor(async () => {
       const elementStable = await waitForSelector(page, elementIdentifier);
 
-      if (elementStable) {
-        if (isUnchecked) {
-          await uncheckElement(page, elementIdentifier);
-        } else {
-          await checkElement(page, elementIdentifier);
+        if (elementStable) {
+          if (isUnchecked) {
+            await uncheckElement(page, elementIdentifier);
+          } else {
+            await checkElement(page, elementIdentifier);
+          }
         }
-      }
 
-      return elementStable;
-    });
+        return elementStable;
+      },
+      globalConfig,
+      {target: elementKey});
   }
 );

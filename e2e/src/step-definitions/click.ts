@@ -19,12 +19,14 @@ When(
     const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
     await waitFor(async () => {
-      const elementStable = await waitForSelector(page, elementIdentifier);
-      if (elementStable) {
-        await clickElement(page, elementIdentifier);
-      }
-      return elementStable;
-    });
+        const elementStable = await waitForSelector(page, elementIdentifier);
+        if (elementStable) {
+          await clickElement(page, elementIdentifier);
+        }
+        return elementStable;
+      },
+      globalConfig,
+      {target: elementKey});
   }
 );
 
@@ -43,13 +45,15 @@ When(
     const pageIndex = Number(elementPosition.match(/\d/g)?.join('')) - 1;
 
     await waitFor(async () => {
-      const elementStable = await waitForSelector(page, elementIdentifier);
+        const elementStable = await waitForSelector(page, elementIdentifier);
 
-      if (elementStable) {
-        await clickElementAtIndex(page, elementIdentifier, pageIndex);
-      }
+        if (elementStable) {
+          await clickElementAtIndex(page, elementIdentifier, pageIndex);
+        }
 
-      return elementStable;
-    });
+        return elementStable;
+      },
+      globalConfig,
+      {target: elementKey});
   }
 );
