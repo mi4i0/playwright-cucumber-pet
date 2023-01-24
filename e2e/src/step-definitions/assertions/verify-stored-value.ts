@@ -2,7 +2,7 @@ import { Then } from '@cucumber/cucumber';
 import { ElementKey } from '../../env/global';
 import { ScenarioWorld } from '../setup/world';
 import { getElementLocator } from '../../support/web-element-helper';
-import { waitFor, waitForSelector } from '../../support/wait-for-behavior';
+import { waitFor, waitForResult, waitForSelector } from '../../support/wait-for-behavior';
 import { logger } from "../../logger";
 import { getElementText } from "../../support/html-behavior";
 
@@ -26,13 +26,20 @@ Then(
 
         if (elementStable) {
           const elementText = await getElementText(page, elementIdentifier);
-          return (elementText === variableValue) === !negate;
+          if ((elementText === variableValue) === !negate) {
+            return waitForResult.PASS;
+          } else {
+            return waitForResult.FAIL;
+          }
         } else {
-          return elementStable;
+          return waitForResult.ELEMENTS_NOT_AVAILABLE;
         }
       },
       globalConfig,
-      {target: elementKey});
+      {
+        target: elementKey,
+        failureMessage: `🧨 Expected ${elementKey} to ${negate ? 'not ' : ''}contain the ${variableKey} in global variables 🧨`
+      });
   }
 );
 
@@ -56,13 +63,19 @@ Then(
 
         if (elementStable) {
           const elementText = await getElementText(page, elementIdentifier);
-          return elementText?.includes(variableValue) === !negate;
+          if (elementText?.includes(variableValue) === !negate) {
+            return waitForResult.PASS;
+          } else {
+            return waitForResult.FAIL;
+          }
         } else {
-          return elementStable;
+          return waitForResult.ELEMENTS_NOT_AVAILABLE;
         }
-
       },
       globalConfig,
-      {target: elementKey});
+      {
+        target: elementKey,
+        failureMessage: `🧨 Expected ${elementKey} to ${negate ? 'not ' : ''}contain the ${variableKey} in global variables 🧨`
+      });
   }
 );

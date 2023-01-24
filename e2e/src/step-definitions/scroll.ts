@@ -1,7 +1,7 @@
 import { Then } from '@cucumber/cucumber';
 import { ScenarioWorld } from './setup/world';
 import { scrollElementIntoView, } from '../support/html-behavior';
-import { waitFor, waitForSelector } from '../support/wait-for-behavior';
+import { waitFor, waitForResult, waitForSelector } from '../support/wait-for-behavior';
 import { getElementLocator } from '../support/web-element-helper';
 import { ElementKey } from '../env/global';
 import { logger } from "../logger";
@@ -23,9 +23,10 @@ Then(
 
         if (elementStable) {
           await scrollElementIntoView(page, elementIdentifier);
+          return waitForResult.PASS;
         }
 
-        return elementStable;
+        return waitForResult.ELEMENTS_NOT_AVAILABLE;
       },
       globalConfig,
       {target: elementKey});

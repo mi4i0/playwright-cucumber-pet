@@ -4,25 +4,51 @@ import { envNumber } from "../env/parseEnv";
 import { handleError } from './error-helper';
 import { logger } from "../logger";
 
+export const enum waitForResult {
+  PASS = 1,
+  FAIL = 2,
+  ELEMENTS_NOT_AVAILABLE = 3
+}
+
+export type waitForResultWithContext = {
+  result: waitForResult,
+  replace?: string
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const waitFor = async <T>(
-  predicate: () => T | Promise<T>,
+  predicate: () => waitForResult | Promise<waitForResult> | waitForResultWithContext | Promise<waitForResultWithContext>,
   globalConfig: GlobalConfig,
-  options?: { timeout?: number; wait?: number, target: WaitForTarget; type?: WaitForTargetType }
+  options?: { timeout?: number; wait?: number, target: WaitForTarget; type?: WaitForTargetType, failureMessage?: string }
 ): Promise<void> => {
   const {timeout = 10000, wait = 2000, target = '', type = 'element'} = options || {};
 
   const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
   const startDate = new Date();
+  let notAvailableContext: string | undefined;
 
   try {
     while (new Date().getTime() - startDate.getTime() < timeout) {
       const result = await predicate();
-      if (result) return;
+      let resultAs: waitForResult;
+
+      if ((result as waitForResultWithContext).result) {
+        notAvailableContext = (result as waitForResultWithContext).replace;
+        resultAs = (result as waitForResultWithContext).result;
+      } else {
+        resultAs = result as waitForResult;
+      }
+
+      if (resultAs === waitForResult.PASS) {
+        return;
+      } else if (resultAs === waitForResult.FAIL) {
+        throw Error(options?.failureMessage || 'Test assertion failed');
+      }
 
       await sleep(wait);
-      logger.log(`Waiting ${wait}ms`);
+      logger.debug(`Waiting ${wait}ms`);
     }
-    throw new Error(`Wait time of ${timeout}ms for ${target} exceeded`);
+    throw new Error(`Wait time of ${timeout}ms for ${notAvailableContext || target} exceeded`);
   } catch (error) {
     handleError(globalConfig.errorsConfig, error as Error, target, type,);
   }
