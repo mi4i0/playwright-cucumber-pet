@@ -1,5 +1,5 @@
 import { Then } from '@cucumber/cucumber';
-import { waitFor, waitForSelectorOnPage } from '../support/wait-for-behavior';
+import { waitFor, waitForResult, waitForSelectorOnPage } from '../support/wait-for-behavior';
 import { inputValueOnPage, } from '../support/html-behavior';
 import { getElementLocator } from '../support/web-element-helper';
 import { ScenarioWorld } from './setup/world';
@@ -21,13 +21,16 @@ Then(
     const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
 
     await waitFor(async () => {
-      const pages = context.pages();
-      const elementStable = await waitForSelectorOnPage(page, elementIdentifier, pages, pageIndex);
-      if (elementStable) {
-        await inputValueOnPage(pages, pageIndex, elementIdentifier, inputValue);
-      }
+        const pages = context.pages();
+        const elementStable = await waitForSelectorOnPage(page, elementIdentifier, pages, pageIndex);
+        if (elementStable) {
+          await inputValueOnPage(pages, pageIndex, elementIdentifier, inputValue);
+          return waitForResult.PASS;
+        }
 
-      return elementStable;
-    });
+        return waitForResult.ELEMENTS_NOT_AVAILABLE;
+      },
+      globalConfig,
+      {target: elementKey});
   }
 );

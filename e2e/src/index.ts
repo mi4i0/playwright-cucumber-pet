@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import { env, getJsonFromFile } from './env/parseEnv';
 import { generateCucumberRuntimeTag } from "./support/tag-helper";
-import { EmailsConfig, GlobalConfig, HostsConfig, PageElementMappings, PagesConfig, } from './env/global';
+import { EmailsConfig, ErrorsConfig, GlobalConfig, HostsConfig, PageElementMappings, PagesConfig, } from './env/global';
 import fs from "fs";
 
 const environment = env('NODE_ENV');
@@ -12,6 +12,7 @@ dotenv.config({path: `${env('ENV_PATH')}${environment}.env`});
 const hostsConfig: HostsConfig = getJsonFromFile(env('HOSTS_URLS_PATH'));
 const pagesConfig: PagesConfig = getJsonFromFile(env('PAGE_URLS_PATH'));
 const emailsConfig: EmailsConfig = getJsonFromFile(env('EMAILS_URLS_PATH'));
+const errorsConfig: ErrorsConfig = getJsonFromFile(env('ERRORS_URLS_PATH'));
 
 const mappingFiles = fs.readdirSync(`${process.cwd()}${env('PAGE_ELEMENTS_PATH')}`);
 
@@ -35,10 +36,11 @@ const pageElementMappings: PageElementMappings = mappingFiles.reduce(
 );
 
 const worldParameters: GlobalConfig = {
-    hostsConfig,
-    pagesConfig,
-    emailsConfig,
-    pageElementMappings,
+  hostsConfig,
+  pagesConfig,
+  emailsConfig,
+  pageElementMappings,
+  errorsConfig
 };
 
 const common = `./src/features/**/*.feature \
