@@ -37,7 +37,7 @@ Then(
             return waitForResult.FAIL;
           }
         } else {
-          return waitForResult.ELEMENTS_NOT_AVAILABLE;
+          return waitForResult.ELEMENT_NOT_AVAILABLE;
         }
       },
       globalConfig,
@@ -71,7 +71,7 @@ Then(
             return waitForResult.FAIL;
           }
         } else {
-          return waitForResult.ELEMENTS_NOT_AVAILABLE;
+          return waitForResult.ELEMENT_NOT_AVAILABLE;
         }
       },
       globalConfig,
@@ -105,7 +105,7 @@ Then(
             return waitForResult.FAIL;
           }
         } else {
-          return waitForResult.ELEMENTS_NOT_AVAILABLE;
+          return waitForResult.ELEMENT_NOT_AVAILABLE;
         }
       },
       globalConfig,
@@ -139,7 +139,7 @@ Then(
             return waitForResult.FAIL;
           }
         } else {
-          return waitForResult.ELEMENTS_NOT_AVAILABLE;
+          return waitForResult.ELEMENT_NOT_AVAILABLE;
         }
       },
       globalConfig,
@@ -174,7 +174,7 @@ Then(
             return waitForResult.FAIL;
           }
         } else {
-          return waitForResult.ELEMENTS_NOT_AVAILABLE;
+          return waitForResult.ELEMENT_NOT_AVAILABLE;
         }
       },
       globalConfig,
@@ -210,7 +210,7 @@ Then(
             return waitForResult.FAIL;
           }
         } else {
-          return waitForResult.ELEMENTS_NOT_AVAILABLE;
+          return waitForResult.ELEMENT_NOT_AVAILABLE;
         }
       },
       globalConfig,
@@ -244,7 +244,7 @@ Then(
             return waitForResult.FAIL;
           }
         } else {
-          return waitForResult.ELEMENTS_NOT_AVAILABLE;
+          return waitForResult.ELEMENT_NOT_AVAILABLE;
         }
       },
       globalConfig,
