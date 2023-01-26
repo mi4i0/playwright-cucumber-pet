@@ -25,7 +25,7 @@ Then(
         if (pageTitle?.includes(expectedTitle) === !negate) {
           return waitForResult.PASS;
         } else {
-          return waitForResult.ELEMENTS_NOT_AVAILABLE;
+          return waitForResult.ELEMENT_NOT_AVAILABLE;
         }
       },
       globalConfig,
@@ -56,7 +56,7 @@ Then(
         if (isElementVisible === !negate) {
           return waitForResult.PASS;
         } else {
-          return waitForResult.ELEMENTS_NOT_AVAILABLE;
+          return waitForResult.ELEMENT_NOT_AVAILABLE;
         }
       },
       globalConfig,
@@ -88,7 +88,7 @@ Then(
             return waitForResult.FAIL;
           }
         } else {
-          return waitForResult.ELEMENTS_NOT_AVAILABLE;
+          return waitForResult.ELEMENT_NOT_AVAILABLE;
         }
       },
       globalConfig,
@@ -123,7 +123,7 @@ Then(
             return waitForResult.FAIL;
           }
         } else {
-          return waitForResult.ELEMENTS_NOT_AVAILABLE;
+          return waitForResult.ELEMENT_NOT_AVAILABLE;
         }
       },
       globalConfig,

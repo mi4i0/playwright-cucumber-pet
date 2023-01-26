@@ -7,7 +7,7 @@ import { logger } from "../logger";
 export const enum waitForResult {
   PASS = 1,
   FAIL = 2,
-  ELEMENTS_NOT_AVAILABLE = 3
+  ELEMENT_NOT_AVAILABLE = 3
 }
 
 export type waitForResultWithContext = {

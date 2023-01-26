@@ -40,7 +40,7 @@ export const currentPathMatchesPageId = (
     if (pathMatchesPageId(currentPath, pageId, globalConfig)) {
         return waitForResult.PASS;
     } else {
-        return waitForResult.ELEMENTS_NOT_AVAILABLE;
+        return waitForResult.ELEMENT_NOT_AVAILABLE;
     }
 };
 

@@ -14,5 +14,8 @@
   "street": "[data-id='street']",
   "city": "[data-id='city']",
   "save": "[data-id='save-button']",
-  "playground": "[data-id='playground-button']"
+  "cancel" : "[data-id='cancel-button']",
+  "playground": "[data-id='playground-button']",
+  "no items message" : "[data-id='no-items-message']",
+  "error message" : "[data-id='error-message']"
 }

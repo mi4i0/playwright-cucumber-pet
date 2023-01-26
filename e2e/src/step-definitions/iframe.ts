@@ -29,10 +29,10 @@ Then(
             await inputValueOnIframe(elementIframe, elementIdentifier, inputValue);
             return {result: waitForResult.PASS};
           } else {
-            return {result: waitForResult.ELEMENTS_NOT_AVAILABLE, replace: elementKey};
+            return {result: waitForResult.ELEMENT_NOT_AVAILABLE, replace: elementKey};
           }
         } else {
-          return {result: waitForResult.ELEMENTS_NOT_AVAILABLE, replace: iframeKey};
+          return {result: waitForResult.ELEMENT_NOT_AVAILABLE, replace: iframeKey};
         }
       },
       globalConfig,

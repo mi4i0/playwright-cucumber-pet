@@ -6,6 +6,8 @@ import { getElementLocator } from '../support/web-element-helper';
 import { ScenarioWorld } from './setup/world';
 import { ElementKey } from '../env/global';
 import { logger } from "../logger";
+import { stringIsOfOptions } from '../support/options-helper';
+import { getRandomData, RandomInputType, randomInputTypes } from '../support/ramdom-data-helper';
 
 Then(
   /^I fill in the "([^"]*)" input with "([^"]*)"$/,
@@ -27,7 +29,7 @@ Then(
           return waitForResult.PASS;
         }
 
-        return waitForResult.ELEMENTS_NOT_AVAILABLE;
+        return waitForResult.ELEMENT_NOT_AVAILABLE;
       },
       globalConfig,
       {target: elementKey});
@@ -54,9 +56,42 @@ Then(
           return waitForResult.PASS;
         }
 
-        return waitForResult.ELEMENTS_NOT_AVAILABLE;
+        return waitForResult.ELEMENT_NOT_AVAILABLE;
       },
       globalConfig,
       {target: elementKey});
+  }
+);
+
+Then(
+  /^I fill in the "([^"]*)" input with random "([^"]*)"$/,
+  async function (this: ScenarioWorld, elementKey: ElementKey, randomInputType: RandomInputType) {
+    const {
+      screen: {page},
+      globalConfig,
+    } = this;
+
+    logger.log(`I fill in the ${elementKey} input with random ${randomInputType}`);
+
+    const elementIdentifier = getElementLocator(page, elementKey, globalConfig);
+
+    const validRandomInputType = stringIsOfOptions<RandomInputType>(randomInputType, randomInputTypes);
+
+    await waitFor(
+      async () => {
+
+        const elementStable = await waitForSelector(page, elementIdentifier);
+
+        if (elementStable) {
+          const randomContent = getRandomData(validRandomInputType);
+          await inputElementValue(page, elementIdentifier, randomContent);
+          return waitForResult.PASS;
+        }
+
+        return waitForResult.ELEMENT_NOT_AVAILABLE;
+      },
+      globalConfig,
+      {target: elementKey}
+    );
   }
 );
