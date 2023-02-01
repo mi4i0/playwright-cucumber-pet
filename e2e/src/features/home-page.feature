@@ -1,5 +1,6 @@
 Feature: As a user I expect to be able to create contacts
 
+  @dev
   @smoke
   @regression
   Scenario: As a user I expect to be able to create a new contact

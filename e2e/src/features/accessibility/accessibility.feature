@@ -1,6 +1,5 @@
 Feature: Generate accessibility reports across our website
 
-  @dev
   @accessibility
   @regression
   Scenario: Generate an accessibility report for the Home page
