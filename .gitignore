@@ -6,6 +6,7 @@
 # dependencies
 /node_modules/
 e2e/node_modules/
+api_e2e/node_modules/
 /.pnp
 .pnp.js
 
@@ -29,3 +30,4 @@ yarn-error.log*
 #E2E
 e2e/reports/
 e2e/dist/
+api_e2e/playwright-report/
