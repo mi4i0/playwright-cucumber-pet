@@ -4,11 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx playwright test --reporter=html"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@playwright/test": "^1.30.0"
+    "@playwright/test": "1.30.0"
   }
 }

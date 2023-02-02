@@ -30,3 +30,4 @@ yarn-error.log*
 #E2E
 e2e/reports/
 e2e/dist/
+api_e2e/playwright-report/
